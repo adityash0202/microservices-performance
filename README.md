@@ -1,28 +1,37 @@
-# DCS_PROJECT
-# django-microservices
-Django Microservices Project using Docker, nginx and Django REST Framework
+# Microservices Architecture: Serverless vs Serverful Performance
 
-Overview
---------
-We have 3 docker containers:
+This project compares the performance of serverless and serverful deployments using a Django-based microservices architecture. The system includes three services: **polls**, **questions**, and **votes**.
 
-* polls: runs the polls service
-* questions: runs the questions service
-* votes: runs the votes service
+## Highlights
 
-Requirements
-------------
-* docker
-* docker-compose
+- Built and containerized each microservice using Docker.
+- Deployed serverful setup with Docker Compose.
+- Deployed serverless version using Google Cloud Endpoints.
+- Monitored latency and response time with Grafana.
+- Compared performance between both deployment models.
 
-Usage
------
+## Results
 
-    $ docker-compose up
+| Metric        | Serverful | Serverless |
+|---------------|-----------|------------|
+| Latency       | 72 ms     | 49 ms      |
+| Response Time | 153 ms    | 90 ms      |
 
-Deployment Requirements:
-We have used PostgreSQl. In serverless GCP was connected to our database but its credentials are valid for only 7 days. After every 7 days user needs to use new credentials, so please create new one if it seems expired.
-For serverful deployment please create new Google compute engine instance which is required for this serverful deployment, because our instance can be used only by our own GCP credentials. 
-All other requirements and dependecies are present in our microservices.
+## Tech Stack
 
+- Django
+- PostgreSQL
+- Docker & Docker Compose
+- Google Cloud Platform (GCP)
+- Grafana
 
+## Folder Overview
+
+Each microservice (polls, questions, votes) is in its own folder under `django-microservices/`. The setup includes:
+
+- `docker-compose.yml` for local/serverful deployment
+- `api_gateway.yml` for GCP serverless deployment
+
+## Summary
+
+This repository demonstrates how architectural choices impact application performance. It serves as a benchmark for evaluating microservices under different deployment strategies.
