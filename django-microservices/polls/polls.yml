@@ -1,0 +1,72 @@
+swagger: "2.0"
+info:
+    version: 1.0.0
+    title: User API
+schemes:
+    - https
+produces:
+    - application/json
+x-google-endpoints:
+    - name: https://wellnesswatch-b62qapbl.uc.gateway.dev
+      allowCors: True
+paths:
+    # Polls ------------
+    /admin/poll_app/poll:
+        options:
+            summary: CORS pre-flight
+            operationId: corsUsers
+            x-google-backend:
+                address: "https://polls-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            responses:
+                "200":
+                    description: A successful response
+        get:
+            operationId: getList
+            x-google-backend:
+                address: "https://userservice-42pm2bswzq-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Get all users
+            responses:
+                "200":
+                    description: OK
+        post:
+            operationId: createUser
+            x-google-backend:
+                address: "https://userservice-42pm2bswzq-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Create a new Poll
+            parameters:
+                - name: title
+                  in: body
+                  description: Title of the Poll 
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Poll"
+            responses:
+                "200":
+                    description: OK
+# schemas -----
+definitions:
+    Poll:
+        type: object
+        properties:
+            title:
+                type: string
+            description:
+                type: string
+            created_at:
+                type: date
+            updated_at:
+                type: date
+            is_active:
+                type: boolean
+    UserCredentials:
+        type: object
+        properties:
+            username:
+                type: string
+            password:
+                type: string
+            email:
+                type: string

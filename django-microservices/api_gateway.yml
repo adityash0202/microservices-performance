@@ -1,0 +1,344 @@
+swagger: "2.0"
+info:
+    version: 1.0.0
+    title: User API
+schemes:
+    - https
+produces:
+    - application/json
+x-google-endpoints:
+    - name: http://dcs-project.atwebpages.com
+      allowCors: True
+paths:
+    # Polls ------------
+    /polls:
+        options:
+            summary: CORS pre-flight
+            operationId: corsPolls
+            x-google-backend:
+                address: "https://polls-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            responses:
+                "200":
+                    description: A successful response
+        get:
+            operationId: getPollList
+            x-google-backend:
+                address: "https://polls-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Get all polls
+            responses:
+                "200":
+                    description: OK
+        post:
+            operationId: createPoll
+            x-google-backend:
+                address: "https://polls-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Create a new Poll
+            parameters:
+                - name: title
+                  in: body
+                  description: Title of the Poll
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Poll"
+            responses:
+                "200":
+                    description: OK
+    /polls/{id}:
+        options:
+            summary: CORS pre-flight
+            operationId: corsPollsId
+            x-google-backend:
+                address: "https://polls-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: A successful response
+        get:
+            operationId: getPollById
+            x-google-backend:
+                address: "https://polls-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Get a user by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: OK
+                    schema:
+                        $ref: "#/definitions/Poll"
+
+        delete:
+            operationId: deletePollById
+            x-google-backend:
+                address: "https://polls-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Delete a poll by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: OK
+        put:
+            operationId: updatePollById
+            x-google-backend:
+                address: "https://polls-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Update a poll by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+                - name: title
+                  in: body
+                  description: Details of the Poll
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Poll"
+            responses:
+                "200":
+                    description: OK
+    # Questions ------------
+    /questions:
+        options:
+            summary: CORS pre-flight
+            operationId: corsQuestion
+            x-google-backend:
+                address: "https://questions-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            responses:
+                "200":
+                    description: A successful response
+        get:
+            operationId: getQuestionList
+            x-google-backend:
+                address: "https://questions-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Get all questions
+            responses:
+                "200":
+                    description: OK
+        post:
+            operationId: createQuestions
+            x-google-backend:
+                address: "https://questions-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Create a new Question
+            parameters:
+                - name: title
+                  in: body
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Question"
+            responses:
+                "200":
+                    description: OK
+    /questions/{id}:
+        options:
+            summary: CORS pre-flight
+            operationId: corsQuestionId
+            x-google-backend:
+                address: "https://questions-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: A successful response
+        get:
+            operationId: getQuestionById
+            x-google-backend:
+                address: "https://questions-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Get a question by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: OK
+                    schema:
+                        $ref: "#/definitions/Poll"
+
+        delete:
+            operationId: deleteQuestionById
+            x-google-backend:
+                address: "https://questions-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Delete a question by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: OK
+        put:
+            operationId: updateQuestionById
+            x-google-backend:
+                address: "https://questions-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Update a question by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+                - name: title
+                  in: body
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Question"
+            responses:
+                "200":
+                    description: OK
+
+    # Questions ------------
+    /votes:
+        options:
+            summary: CORS pre-flight
+            operationId: corsVotes
+            x-google-backend:
+                address: "https://votes-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            responses:
+                "200":
+                    description: A successful response
+        get:
+            operationId: getVoteList
+            x-google-backend:
+                address: "https://votes-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Get all votes
+            responses:
+                "200":
+                    description: OK
+        post:
+            operationId: createVotes
+            x-google-backend:
+                address: "https://votes-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Create a new Vote
+            parameters:
+                - name: title
+                  in: body
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Vote"
+            responses:
+                "200":
+                    description: OK
+    /votes/{id}:
+        options:
+            summary: CORS pre-flight
+            operationId: corsVoteId
+            x-google-backend:
+                address: "https://votes-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: A successful response
+        get:
+            operationId: getVoteById
+            x-google-backend:
+                address: "https://votes-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Get a vote by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: OK
+                    schema:
+                        $ref: "#/definitions/Vote"
+
+        delete:
+            operationId: deleteVoteById
+            x-google-backend:
+                address: "https://votes-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Delete a vote by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+            responses:
+                "200":
+                    description: OK
+        put:
+            operationId: updateVoteById
+            x-google-backend:
+                address: "https://votes-mevelohtha-uc.a.run.app"
+                path_translation: APPEND_PATH_TO_ADDRESS
+            summary: Update a vote by ID
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  type: string
+                - name: title
+                  in: body
+                  required: true
+                  schema:
+                      $ref: "#/definitions/Vote"
+            responses:
+                "200":
+                    description: OK
+# schemas -----
+definitions:
+    Poll:
+        type: object
+        properties:
+            title:
+                type: string
+            description:
+                type: string
+            created_at:
+                type: array
+            updated_at:
+                type: array
+            is_active:
+                type: boolean
+    Question:
+        type: object
+        properties:
+            question_text:
+                type: integer
+            created_at:
+                type: array
+    Vote:
+        type: object
+        properties:
+            choice_id:
+                type: integer
+            poll_id:
+                type: integer
